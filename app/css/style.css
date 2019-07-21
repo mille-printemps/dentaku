@@ -1,0 +1,144 @@
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+/* li style */
+
+li {
+	list-style: none;
+}
+
+li.display {
+    padding-left: 7px;
+    padding-right: 7px;    
+}
+
+li.key {
+    width: 65px;
+    height: 30px;
+	margin: 4px;
+	float: left;
+}
+
+/* ul style */
+
+ul {
+    padding-left: 5px;
+    padding-right: 5px;    
+}
+
+/* div style */
+
+div {
+    display: table-cell;    
+    text-align: center;
+    vertical-align: middle;    
+    border: solid;
+    border-width: thin;
+    font-family: 'Lucida Grande','Hiragino Kaku Gothic ProN', Meiryo,arial,sans-serif;
+}
+
+div.body {
+    width: 400px;
+    height: 300px;
+    padding-top: 30px;    
+    padding-left: 25px;
+    padding-right: 25px;
+    border: outset;
+    border-color: #DDDDDD;
+    box-shadow: 2px 2px rgba(0,0,0,0,4);
+    color: #FFFFFF;
+}
+
+div.monitor {
+    width: 370px;
+    height: 20px;
+    display: inline-block;
+    border-color: #FFFFFF;
+    overflow: hidden;
+    white-space: nowrap;    
+}
+
+div.display {
+    width: 370px;
+    height: 50px;
+    display: inline-block;
+    border-color: #DDDDDD;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+div.panel {
+    border: none;
+    border-color: #FFFFFF;            
+}
+
+div.basic {
+	width: 330px;
+    border: none;    
+/*    border-color: #DDDDDD; */
+}
+
+div.function {
+	width: 70px;
+    border: none;    
+/*    border-color: #DDDDDD; */
+}
+
+div.key {
+    width: 65px;
+    height: 25px;
+    cursor: pointer;
+}
+
+div.num {
+    background-color: #EEEEEE;
+    border-color: #DDDDDD;
+}
+
+div.equ {
+    background-color: #0099FF;
+    border-color: #99CCFF;
+}
+
+div.sym {
+    background-color: #CCCCCC;
+    border-color: #DDDDDD;
+}
+
+/* span style */
+
+span.key {
+    color: #000000;
+}
+
+span.expression {
+    vertical-align: middle;
+    float: right;
+    font-family: helvetica,arial,sans-serif;
+    font-weight: lighter;
+    font-size: 100%;
+    color: #CCCCCC;
+}
+
+span.formula {
+    vertical-align: middle;
+    float: right;
+    font-family: helvetica,arial,sans-serif;
+    font-weight: lighter;
+    font-size: 200%;
+    color: #000000;
+}
+
+/* sup style */
+
+sup.empty {
+    color: #CCCCCC;
+}

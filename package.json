@@ -1,0 +1,45 @@
+{
+  "name": "dentaku",
+  "version": "1.0.0",
+  "description": "An arithmetic calculator application",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp test",
+    "clean": "gulp clean",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mille-printemps/dentaku.git"
+  },
+  "author": "Chiharu Kawatake",
+  "license": "MIT",
+  "homepage": "https://github.com/mille-printemps/dentaku",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "decimal.js": "^10.2.0",
+    "jquery": "^3.4.1",
+    "mocha": "^6.1.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/jquery": "^3.3.30",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.6.3",
+    "del": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-cached": "^1.1.1",
+    "gulp-load-plugins": "^2.0.0",
+    "gulp-mocha": "^6.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-tslint": "^8.1.4",
+    "gulp-typescript": "^5.0.1",
+    "ts-loader": "^6.0.4",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6",
+    "webpack-stream": "^5.2.1"
+  }
+}

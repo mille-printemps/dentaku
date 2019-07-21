@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <!--
+     NOTE: controller.js depneds on string literals of IDs used for the keys belllow. e.g. '%', 'ln', 'log'
+     If these IDs are changed, controller.js also has to be modified, accordingly.
+  -->
+  <head>
+    <title>Dentaku</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+
+  <body>
+    <script type="text/javascript" src="js/main.js"></script>
+    <div id="body" class="body">
+    <ul>
+
+      <li class="monitor">
+        <div id="monitor" class="monitor">
+          <span id="expression" class="expression"></span>
+        </div>
+      </li>
+      <li class="display">
+        <div id="display" class="display">
+          <span id="formula" class="formula"></span>
+        </div>
+      </li>
+      
+      <li>
+        <div id="panel" class="panel">
+          <div id="function" class="function">
+            <ul>
+              <li class="key"><div class="key sym"><span id="%" class="key">modulo</span></div></li>
+              <li class="key"><div class="key sym"><span id="ln" class="key">ln</span></div></li>
+              <li class="key"><div class="key sym"><span id="log" class="key">log</span></div></li>
+              <li class="key"><div class="key sym"><span id="sqrt" class="key">&#8730;</span></div></li>
+              <li class="key"><div class="key sym"><span id="^" class="key">x<sup>y</sup></span></div></li>
+            </ul>
+          </div>
+          <div id="basic" class="basic">
+            <ul>
+              <li class="key"><div class="key sym"><span id="(" class="key">(</span></div></li>
+              <li class="key"><div class="key sym"><span id=")" class="key">)</span></div></li>
+              <li class="key"><div class="key sym"><span id="CE" class="key">CE</span></div></li>
+              <li class="key"><div class="key sym"><span id="CA" class="key">CA</span></div></li>
+              
+              <li class="key"><div class="key num"><span id="7" class="key">7</span></div></li>
+              <li class="key"><div class="key num"><span id="8" class="key">8</span></div></li>
+              <li class="key"><div class="key num"><span id="9" class="key">9</span></div></li>
+              <li class="key"><div class="key sym"><span id="/" class="key">&divide;</span></div></li>
+      
+              <li class="key"><div class="key num"><span id="4" class="key">4</span></div></li>
+              <li class="key"><div class="key num"><span id="5" class="key">5</span></div></li>
+              <li class="key"><div class="key num"><span id="6" class="key">6</span></div></li>
+              <li class="key"><div class="key sym"><span id="*" class="key">&times;</span></div></li>
+              
+              <li class="key"><div class="key num"><span id="1" class="key">1</span></div></li>
+              <li class="key"><div class="key num"><span id="2" class="key">2</span></div></li>
+              <li class="key"><div class="key num"><span id="3" class="key">3</span></div></li>
+              <li class="key"><div class="key sym"><span id="-" class="key">-</span></div></li>
+              
+              <li class="key"><div class="key num"><span id="0" class="key">0</span></div></li>
+              <li class="key"><div class="key num"><span id="." class="key">.</span></div></li>
+              <li class="key"><div class="key equ"><span id="=" class="key">=</span></div></li>
+              <li class="key"><div class="key sym"><span id="+" class="key">+</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+    </div>
+</body>
+</html>

@@ -7,11 +7,11 @@ import { Expression } from './expression';
 const NUMBERS = '0123456789';
 const OPERATORS = '-+*/%^';
 const OPERATORS_WITHOUT_MINUS = OPERATORS.substring(1, OPERATORS.length);
-const NUMBER_PRECEDENTS = NUMBERS + OPERATORS + '.neg(';
-const RIGHT_PAREN_PRECEDENTS = NUMBERS + ')';
-const BINARY_OPERATOR_PRECEDENTS = NUMBERS + OPERATORS + ')';
-const UNARY_OPERATOR_PRECEDENTS = OPERATORS + 'neg(';
-const MINUS_OPERATOR_PRECEDENTS = NUMBERS + OPERATORS_WITHOUT_MINUS + '()';
+const NUMBER_PRECEDENCE = NUMBERS + OPERATORS + '.neg(';
+const RIGHT_PAREN_PRECEDENCE = NUMBERS + ')';
+const BINARY_OPERATOR_PRECEDENCE = NUMBERS + OPERATORS + ')';
+const UNARY_OPERATOR_PRECEDENCE = OPERATORS + 'neg(';
+const MINUS_OPERATOR_PRECEDENCE = NUMBERS + OPERATORS_WITHOUT_MINUS + '()';
 
 export class Controller {
   private readonly MAX_LENGTH_OF_FORMULA: number;
@@ -57,20 +57,20 @@ export class Controller {
       return last !== "" && (NUMBERS.indexOf(last.trim()) !== -1) && (this.dotAdded_ !== true);
     };
     const numberCanFollow = (last: string): boolean => {
-      return NUMBER_PRECEDENTS.indexOf(last.trim()) !== -1;
+      return NUMBER_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const rightParenCanFollow = (last: string): boolean => {
-      return last !== "" && RIGHT_PAREN_PRECEDENTS.indexOf(last.trim()) !== -1;
+      return last !== "" && RIGHT_PAREN_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const binaryCanFollow = (last: string): boolean => {
       this.dotAdded_ = false;
-      return last !== "" && BINARY_OPERATOR_PRECEDENTS.indexOf(last.trim()) !== -1;
+      return last !== "" && BINARY_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const unaryCanFollow = (last: string): boolean => {
-      return UNARY_OPERATOR_PRECEDENTS.indexOf(last.trim()) !== -1;
+      return UNARY_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const minusCanFollow = (last: string): boolean => {
-      return MINUS_OPERATOR_PRECEDENTS.indexOf(last.trim()) !== -1;
+      return MINUS_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const pad = (value: string): string => {
       return ' ' + value + ' ';

@@ -1,44 +1,43 @@
-import { Decimal } from 'decimal.js';
 import $ from 'jquery';
-import { Calculator } from './calculator';
-import { Controller } from './controller';
-import { DecimalOperator } from './decimaloperator';
+import { Decimal } from 'decimal.js';
+import { Calculator } from './Calculator';
+import { Controller } from './Controller';
+import { calculateDecimal } from './operator';
 
-$(function() {
+$(() => {
   const MAX_NUMBER_OF_DIGITS = 20;
 
   const controller = new Controller();
-  const operator = DecimalOperator;
-  const calculator = new Calculator<Decimal>(operator);
+  const calculator = new Calculator<Decimal>(calculateDecimal);
 
   const display = (expression: string, formula: string) => {
-    $("span.expression").empty();
-    $("span.expression").append(expression);
+    $('span.expression').empty();
+    $('span.expression').append(expression);
 
-    $("span.formula").empty();
-    $("span.formula").append(formula);
+    $('span.formula').empty();
+    $('span.formula').append(formula);
   };
 
   let resultDisplayed = false;
 
-  $(function() {
-    $("div.sym, div.num")
-      .mouseenter(function() {
+  $(() => {
+    $('div.sym, div.num')
+      .on('mouseenter', function(): void {
         $(this).css({'border-color' : '#AAAAAA', 'box-shadow' : '2px 2px rgba(0,0,0,0,4)'});
       })
-      .mouseleave(function() {
+      .on('mouseleave', function(): void {
         $(this).css({'border-color' : '#DDDDDD', 'box-shadow' : '0px 0px'});
       })
-      .mousedown(function() {
+      .on('mousedown', function(): void {
         const id = $(this).children('span').attr('id');
         const text = $(this).children('span').text();
 
-        if (resultDisplayed === true && '0123456789'.indexOf(id) !== -1) {
+        if (resultDisplayed === true && '0123456789'.indexOf(id!) !== -1) {
           controller.clear();
         }
         resultDisplayed = false;
 
-        const processed = controller.process(id, text);
+        const processed = controller.process(id!, text);
 
         if (processed) {
           display(controller.expression.toString(), controller.formula.toString());
@@ -46,15 +45,15 @@ $(function() {
       });
   });
 
-  $(function() {
-    $("div.equ")
-      .mouseenter(function() {
+  $(() => {
+    $('div.equ')
+      .on('mouseenter', function(): void {
         $(this).css({'border-color' : '#000055', 'box-shadow' : '2px 2px rgba(0,0,0,0,4)'});
       })
-      .mouseleave(function() {
+      .on('mouseleave', function(): void {
         $(this).css({'border-color' : '#99CCFF', 'box-shadow' : '0px 0px'});
       })
-      .mousedown(function() {
+      .on('mousedown', (): void => {
         if (!controller.validate()) {
           return;
         }

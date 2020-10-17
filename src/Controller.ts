@@ -4,16 +4,15 @@
 
 import { Expression } from './expression';
 
-const NUMBERS = '0123456789';
-const OPERATORS = '-+*/%^';
-const OPERATORS_WITHOUT_MINUS = OPERATORS.substring(1, OPERATORS.length);
-const NUMBER_PRECEDENCE = NUMBERS + OPERATORS + '.neg(';
-const RIGHT_PAREN_PRECEDENCE = NUMBERS + ')';
-const BINARY_OPERATOR_PRECEDENCE = NUMBERS + OPERATORS + ')';
-const UNARY_OPERATOR_PRECEDENCE = OPERATORS + 'neg(';
-const MINUS_OPERATOR_PRECEDENCE = NUMBERS + OPERATORS_WITHOUT_MINUS + '()';
-
 export class Controller {
+  private readonly NUMBERS = '0123456789';
+  private readonly OPERATORS = '-+*/%^';
+  private readonly OPERATORS_WITHOUT_MINUS = this.OPERATORS.substring(1, this.OPERATORS.length);
+  private readonly NUMBER_PRECEDENCE = this.NUMBERS + this.OPERATORS + '.neg(';
+  private readonly RIGHT_PAREN_PRECEDENCE = this.NUMBERS + ')';
+  private readonly BINARY_OPERATOR_PRECEDENCE = this.NUMBERS + this.OPERATORS + ')';
+  private readonly UNARY_OPERATOR_PRECEDENCE = this.OPERATORS + 'neg(';
+  private readonly MINUS_OPERATOR_PRECEDENCE = this.NUMBERS + this.OPERATORS_WITHOUT_MINUS + '()';
   private readonly MAX_LENGTH_OF_FORMULA: number;
 
   private dotAdded_: boolean;
@@ -54,23 +53,23 @@ export class Controller {
     // Predicates to check if users' inputs can be added
 
     const dotCanFollow = (last: string): boolean => {
-      return last !== "" && (NUMBERS.indexOf(last.trim()) !== -1) && (this.dotAdded_ !== true);
+      return last !== "" && (this.NUMBERS.indexOf(last.trim()) !== -1) && (this.dotAdded_ !== true);
     };
     const numberCanFollow = (last: string): boolean => {
-      return NUMBER_PRECEDENCE.indexOf(last.trim()) !== -1;
+      return this.NUMBER_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const rightParenCanFollow = (last: string): boolean => {
-      return last !== "" && RIGHT_PAREN_PRECEDENCE.indexOf(last.trim()) !== -1;
+      return last !== "" && this.RIGHT_PAREN_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const binaryCanFollow = (last: string): boolean => {
       this.dotAdded_ = false;
-      return last !== "" && BINARY_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
+      return last !== "" && this.BINARY_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const unaryCanFollow = (last: string): boolean => {
-      return UNARY_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
+      return this.UNARY_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const minusCanFollow = (last: string): boolean => {
-      return MINUS_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
+      return this.MINUS_OPERATOR_PRECEDENCE.indexOf(last.trim()) !== -1;
     };
     const pad = (value: string): string => {
       return ' ' + value + ' ';
@@ -101,7 +100,7 @@ export class Controller {
       this.dotAdded_ = true;
       this.formula_.push(id);
       this.expression_.push(id);
-    } else if (NUMBERS.indexOf(id) !== -1) {
+    } else if (this.NUMBERS.indexOf(id) !== -1) {
       if (!numberCanFollow(this.expression_.last())) {
         return false;
       }
@@ -135,7 +134,7 @@ export class Controller {
       if (!binaryCanFollow(this.expression_.last())) {
         return false;
       }
-      if (OPERATORS.indexOf(this.expression_.last().trim()) !== -1) {
+      if (this.OPERATORS.indexOf(this.expression_.last().trim()) !== -1) {
         this.formula_.pop();
         this.expression_.pop();
       }
@@ -161,7 +160,7 @@ export class Controller {
       if (!binaryCanFollow(this.expression_.last())) {
         return false;
       }
-      if (OPERATORS.indexOf(this.expression_.last().trim()) !== -1) {
+      if (this.OPERATORS.indexOf(this.expression_.last().trim()) !== -1) {
         this.formula_.pop();
         this.expression_.pop();
       }
@@ -172,7 +171,7 @@ export class Controller {
       if (!binaryCanFollow(this.expression_.last())) {
         return false;
       }
-      if (OPERATORS.indexOf(this.expression_.last().trim()) !== -1) {
+      if (this.OPERATORS.indexOf(this.expression_.last().trim()) !== -1) {
         this.formula_.pop();
         this.expression_.pop();
       }

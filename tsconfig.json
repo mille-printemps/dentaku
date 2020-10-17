@@ -1,19 +1,29 @@
 {
   "compilerOptions": {
+    "outDir": "lib",
+    "rootDirs": [
+      ".",
+      "src"
+    ],
+    "strict": true,
     "module": "commonjs",
+    "target": "es5",
     "noImplicitAny": true,
     "removeComments": true,
-    "preserveConstEnums": true,
-    "target": "es6",
-    "noLib": false,
+    "allowJs": true,
+    "moduleResolution": "node",
     "sourceMap": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "types" : ["node"]
+    "types" : [
+      "jest",
+      "node"
+    ]
   },
   "exclude": [
+    "lib",
     "node_modules",
-    "src/main.ts"
+    "__tests__/*",
+    "**/**/*.js",
   ]
 }

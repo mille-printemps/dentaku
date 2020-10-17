@@ -1,9 +1,7 @@
-.DS_Store
-
+lib
+node_modules
+coverage
 *~
 *.orig
 *.backup
-
-node_modules
-src/*.js
-test/*.js
+.DS_Store

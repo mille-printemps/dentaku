@@ -8,6 +8,9 @@ export class Expression {
   private body: string[];
 
   constructor() {
+    this.leftParen = 0;
+    this.rightParen = 0;
+    this.body = [];
     this.clear();
   }
 
@@ -31,12 +34,12 @@ export class Expression {
     }
   }
 
-  public pop(): string {
+  public pop(): string | undefined {
     if (this.body.length === 0) {
       return "";
     }
 
-    const token = this.body.pop();
+    const token: string | undefined = this.body.pop();
 
     if (token === "(") {
       this.leftParen--;

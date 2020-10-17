@@ -2,28 +2,23 @@
 
 An arithmetic calculator application
 
-
-## Requirements
-
-- node.js
-- npm
-
-
 ## Build
 
 ```
 
   %> npm install
-  %> npm run test
-  %> npm run webpack
+  %> npm run build
 
 ```
 
 ## Run
 
-- Go to the `app` directory.
-- Open `index.html` in your web browser.
+```
 
+  %> cd app
+  %> open index.html
+  
+```
 
 ## Model
 

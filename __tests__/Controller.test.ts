@@ -1,8 +1,6 @@
-import { expect } from 'chai';
-import * as mocha from 'mocha';
-import { Controller } from '../src/controller';
+import { Controller } from '../src/Controller';
 
-describe("Controller", () => {
+describe('Controller', () => {
   const NUMBERS = '0123456789';
   const BINARY_OPERATORS = '-+*/%^';
   const UNARY_OPERATORS = ['log', 'ln', 'sqrt'];
@@ -23,132 +21,132 @@ describe("Controller", () => {
     controller = new Controller();
   });
 
-  describe("CA", () => {
-    it ("should be able to reset the controller.", () => {
+  describe('CA', () => {
+    test('should be able to reset the controller.', () => {
       controller.process(ONE, ONE);
-      expect(controller.formula.length()).to.equal(1);
-      expect(controller.expression.length()).to.equal(1);
+      expect(controller.formula.length()).toEqual(1);
+      expect(controller.expression.length()).toEqual(1);
 
       controller.process(CA, CA);
-      expect(controller.formula.length()).to.equal(0);
-      expect(controller.expression.length()).to.equal(0);
-      expect(controller.dotAdded).to.equal(false);
+      expect(controller.formula.length()).toEqual(0);
+      expect(controller.expression.length()).toEqual(0);
+      expect(controller.dotAdded).toEqual(false);
     });
   });
 
-  describe("CE", () => {
-    it ("should be able to remove the last item in the cotroller.", () => {
+  describe('CE', () => {
+    test('should be able to remove the last item in the cotroller.', () => {
       controller.process(ONE, ONE);
 
       controller.process(CE, CE);
-      expect(controller.formula.length()).to.equal(0);
-      expect(controller.expression.length()).to.equal(0);
+      expect(controller.formula.length()).toEqual(0);
+      expect(controller.expression.length()).toEqual(0);
     });
 
-    it ("should be able to check if the last item is a dot.", () => {
+    test('should be able to check if the last item is a dot.', () => {
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
-      expect(controller.dotAdded).to.equal(true);
+      expect(controller.dotAdded).toEqual(true);
 
       controller.process(CE, CE);
-      expect(controller.dotAdded).to.equal(false);
+      expect(controller.dotAdded).toEqual(false);
     });
   });
 
-  describe("Dot", () => {
-    it ("should be processed when the last item added is a number.", () => {
+  describe('Dot', () => {
+    test('should be processed when the last item added is a number.', () => {
       for (const num of NUMBERS) {
         controller.process(num, num);
         controller.process(DOT, DOT);
 
-        expect(controller.formula.last()).to.equal(DOT);
-        expect(controller.expression.last()).to.equal(DOT);
-        expect(controller.dotAdded).to.equal(true);
+        expect(controller.formula.last()).toEqual(DOT);
+        expect(controller.expression.last()).toEqual(DOT);
+        expect(controller.dotAdded).toEqual(true);
 
         controller.clear();
       }
     });
 
-    it ("should not be processed when the last item added is something other than numbers.", () => {
+    test('should not be processed when the last item added is something other than numbers.', () => {
       controller.process(DOT, DOT);
-      expect(controller.formula.length()).to.equal(0);
-      expect(controller.expression.length()).to.equal(0);
+      expect(controller.formula.length()).toEqual(0);
+      expect(controller.expression.length()).toEqual(0);
 
       controller.process('(', '(');
       controller.process(DOT, DOT);
-      expect(controller.formula.length()).to.equal(1);
-      expect(controller.expression.length()).to.equal(1);
+      expect(controller.formula.length()).toEqual(1);
+      expect(controller.expression.length()).toEqual(1);
     });
 
-    it ("should not be processed when a dot has already been added.", () => {
+    test('should not be processed when a dot has already been added.', () => {
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
 
-      expect(controller.formula.last()).to.equal(ONE);
-      expect(controller.expression.last()).to.equal(ONE);
+      expect(controller.formula.last()).toEqual(ONE);
+      expect(controller.expression.last()).toEqual(ONE);
     });
 
-    it ("should be processed when a dot is removed or a binary operator is added.", () => {
+    test('should be processed when a dot is removed or a binary operator is added.', () => {
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
 
-      expect(controller.formula.last()).to.equal(ONE);
-      expect(controller.expression.last()).to.equal(ONE);
+      expect(controller.formula.last()).toEqual(ONE);
+      expect(controller.expression.last()).toEqual(ONE);
 
       controller.process(CE, CE);
       controller.process(CE, CE);
       controller.process(DOT, DOT);
-      expect(controller.formula.last()).to.equal(DOT);
-      expect(controller.expression.last()).to.equal(DOT);
+      expect(controller.formula.last()).toEqual(DOT);
+      expect(controller.expression.last()).toEqual(DOT);
 
       controller.process(ONE, ONE);
       controller.process(PLUS, PLUS);
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
-      expect(controller.formula.last()).to.equal(DOT);
-      expect(controller.expression.last()).to.equal(DOT);
+      expect(controller.formula.last()).toEqual(DOT);
+      expect(controller.expression.last()).toEqual(DOT);
     });
 
   });
 
-  describe("Numbers", () => {
-    it ("should be able to be added after a number.", () => {
+  describe('Numbers', () => {
+    test('should be able to be added after a number.', () => {
       for (const numi of NUMBERS) {
         controller.process(numi, numi);
         for (const numj of NUMBERS) {
           controller.process(numj, numj);
-          expect(controller.formula.last()).to.equal(numj);
-          expect(controller.expression.last()).to.equal(numj);
+          expect(controller.formula.last()).toEqual(numj);
+          expect(controller.expression.last()).toEqual(numj);
           controller.process(CE, CE);
         }
         controller.process(CE, CE);
       }
     });
 
-    it ("should be able to be added after a dot.", () => {
+    test('should be able to be added after a dot.', () => {
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
       for (const num of NUMBERS) {
         controller.process(num, num);
-        expect(controller.formula.last()).to.equal(num);
-        expect(controller.expression.last()).to.equal(num);
+        expect(controller.formula.last()).toEqual(num);
+        expect(controller.expression.last()).toEqual(num);
         controller.process(CE, CE);
       }
     });
 
-    it ("should be able to be added after a binary operator.", () => {
+    test('should be able to be added after a binary operator.', () => {
       controller.process(ONE, ONE);
       for (const bop of BINARY_OPERATORS) {
         controller.process(bop, bop);
         for (const num of NUMBERS) {
           controller.process(num, num);
 
-          expect(controller.formula.last()).to.equal(num);
-          expect(controller.expression.last()).to.equal(num);
+          expect(controller.formula.last()).toEqual(num);
+          expect(controller.expression.last()).toEqual(num);
           controller.process(CE, CE);
         }
         controller.process(CE, CE);
@@ -156,8 +154,8 @@ describe("Controller", () => {
     });
   });
 
-  describe("Unary operators and left parenthesis.", () => {
-    it ("should be able to be added after a binary operator", () => {
+  describe('Unary operators and left parenthesis.', () => {
+    test('should be able to be added after a binary operator', () => {
       const operators = Array.from(UNARY_OPERATORS);
       operators.push(LEFT_PAREN);
       controller.process(ONE, ONE);
@@ -167,8 +165,8 @@ describe("Controller", () => {
         for (const op of operators) {
           controller.process(op, op);
 
-          expect(controller.formula.last()).to.equal(LEFT_PAREN);
-          expect(controller.expression.last()).to.equal(LEFT_PAREN);
+          expect(controller.formula.last()).toEqual(LEFT_PAREN);
+          expect(controller.expression.last()).toEqual(LEFT_PAREN);
 
           controller.process(CE, CE);
           controller.process(CE, CE);
@@ -177,7 +175,7 @@ describe("Controller", () => {
       }
     });
 
-    it ("should be able to be added after 'neg'", () => {
+    test('should be able to be added after "neg"', () => {
       const operators = Array.from(UNARY_OPERATORS);
       operators.push(LEFT_PAREN);
       controller.process(NEG, NEG);
@@ -185,30 +183,30 @@ describe("Controller", () => {
       for (const op of operators) {
         controller.process(op, op);
 
-        expect(controller.formula.last()).to.equal(LEFT_PAREN);
-        expect(controller.expression.last()).to.equal(LEFT_PAREN);
+        expect(controller.formula.last()).toEqual(LEFT_PAREN);
+        expect(controller.expression.last()).toEqual(LEFT_PAREN);
 
         controller.process(CE, CE);
         controller.process(CE, CE);
       }
     });
 
-    it ("should be able to be added after a left parenthesis.", () => {
+    test('should be able to be added after a left parenthesis.', () => {
       const operators = Array.from(UNARY_OPERATORS);
       operators.push(LEFT_PAREN);
 
       for (const op of operators) {
         controller.process(op, op);
 
-        expect(controller.formula.last()).to.equal(LEFT_PAREN);
-        expect(controller.expression.last()).to.equal(LEFT_PAREN);
+        expect(controller.formula.last()).toEqual(LEFT_PAREN);
+        expect(controller.expression.last()).toEqual(LEFT_PAREN);
 
         controller.process(CE, CE);
         controller.process(CE, CE);
       }
     });
 
-    it ("should not be added after a number.", () => {
+    test('should not be added after a number.', () => {
       const operators = Array.from(UNARY_OPERATORS);
       operators.push(LEFT_PAREN);
 
@@ -217,31 +215,31 @@ describe("Controller", () => {
         for (const op of operators) {
           controller.process(op, op);
 
-          expect(controller.formula.last()).not.to.equal(LEFT_PAREN);
-          expect(controller.expression.last()).not.to.equal(LEFT_PAREN);
+          expect(controller.formula.last()).not.toEqual(LEFT_PAREN);
+          expect(controller.expression.last()).not.toEqual(LEFT_PAREN);
         }
         controller.process(CE, CE);
       }
     });
   });
 
-  describe("Binary operators except '-' and '^'", () => {
-    it ("should be able to be added after numbers.", () => {
+  describe('Binary operators except "-" and "^"', () => {
+    test('should be able to be added after numbers.', () => {
       const operators = BINARY_OPERATORS.substring(1, BINARY_OPERATORS.length - 1);
       for (const num of NUMBERS) {
         controller.process(num, num);
         for (const op of operators) {
           controller.process(op, op);
 
-          expect(controller.formula.last().trim()).to.equal(op);
-          expect(controller.expression.last().trim()).to.equal(op);
+          expect(controller.formula.last().trim()).toEqual(op);
+          expect(controller.expression.last().trim()).toEqual(op);
           controller.process(CE, CE);
         }
         controller.process(CE, CE);
       }
     });
 
-    it ("should be able to replace a precceeding binary operator.", () => {
+    test('should be able to replace a precceeding binary operator.', () => {
       const operators = BINARY_OPERATORS.substring(1, BINARY_OPERATORS.length - 1);
       controller.process(ONE, ONE);
 
@@ -251,15 +249,15 @@ describe("Controller", () => {
         for (const op of operators) {
           controller.process(op, op);
 
-          expect(controller.formula.last().trim()).to.equal(op);
-          expect(controller.expression.last().trim()).to.equal(op);
+          expect(controller.formula.last().trim()).toEqual(op);
+          expect(controller.expression.last().trim()).toEqual(op);
           controller.process(op, op);
         }
         controller.process(CE, CE);
       }
     });
 
-    it ("should be able to be added after a right parenthesis.", () => {
+    test('should be able to be added after a right parenthesis.', () => {
       const operators = BINARY_OPERATORS.substring(1, BINARY_OPERATORS.length - 1);
       controller.process(LEFT_PAREN, LEFT_PAREN);
       controller.process(ONE, ONE);
@@ -269,25 +267,25 @@ describe("Controller", () => {
       for (const op of operators) {
         controller.process(op, op);
 
-        expect(controller.formula.last().trim()).to.equal(op);
-        expect(controller.expression.last().trim()).to.equal(op);
+        expect(controller.formula.last().trim()).toEqual(op);
+        expect(controller.expression.last().trim()).toEqual(op);
         controller.process(CE, CE);
       }
     });
 
-    it ("should not be able to be added after a left parenthesis.", () => {
+    test('should not be able to be added after a left parenthesis.', () => {
       const operators = BINARY_OPERATORS.substring(1, BINARY_OPERATORS.length - 1);
       controller.process(LEFT_PAREN, LEFT_PAREN);
 
       for (const op of operators) {
         controller.process(op, op);
 
-        expect(controller.formula.last().trim()).not.to.equal(op);
-        expect(controller.expression.last().trim()).not.to.equal(op);
+        expect(controller.formula.last().trim()).not.toEqual(op);
+        expect(controller.expression.last().trim()).not.toEqual(op);
       }
     });
 
-    it ("should not be able to be added after a dot.", () => {
+    test('should not be able to be added after a dot.', () => {
       const operators = BINARY_OPERATORS.substring(1, BINARY_OPERATORS.length - 1);
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
@@ -295,128 +293,128 @@ describe("Controller", () => {
       for (const op of operators) {
         controller.process(op, op);
 
-        expect(controller.formula.last().trim()).not.to.equal(op);
-        expect(controller.expression.last().trim()).not.to.equal(op);
+        expect(controller.formula.last().trim()).not.toEqual(op);
+        expect(controller.expression.last().trim()).not.toEqual(op);
       }
     });
   });
 
-  describe("Minus", () => {
-    it ("should be able to replace '+' with itself.", () => {
+  describe('Minus', () => {
+    test('should be able to replace '+' with itself.', () => {
       controller.process(ONE, ONE);
       controller.process(PLUS, PLUS);
       controller.process(MINUS, MINUS);
-      expect(controller.formula.last().trim()).to.equal(MINUS);
-      expect(controller.expression.last().trim()).to.equal(MINUS);
+      expect(controller.formula.last().trim()).toEqual(MINUS);
+      expect(controller.expression.last().trim()).toEqual(MINUS);
     });
 
-    it ("should be able to add 'neg' after binary operators.", () => {
+    test('should be able to add "neg" after binary operators.', () => {
       const operators = BINARY_OPERATORS.substring(2, BINARY_OPERATORS.length);
       controller.process(ONE, ONE);
       for (const op of operators) {
         controller.process(op, op);
         controller.process(MINUS, MINUS);
 
-        expect(controller.formula.last().trim()).to.equal(MINUS);
-        expect(controller.expression.last().trim()).to.equal(NEG);
+        expect(controller.formula.last().trim()).toEqual(MINUS);
+        expect(controller.expression.last().trim()).toEqual(NEG);
 
         controller.process(CE, CE);
         controller.process(CE, CE);
       }
     });
 
-    it ("should be able to add 'neg' after a left parenthesis.", () => {
+    test('should be able to add "neg" after a left parenthesis.', () => {
       controller.process(ONE, ONE);
       controller.process(PLUS, PLUS);
       controller.process(LEFT_PAREN, LEFT_PAREN);
       controller.process(MINUS, MINUS);
 
-      expect(controller.formula.last().trim()).to.equal(MINUS);
-      expect(controller.expression.last().trim()).to.equal(NEG);
+      expect(controller.formula.last().trim()).toEqual(MINUS);
+      expect(controller.expression.last().trim()).toEqual(NEG);
     });
 
-    it ("should be able to be added after a number.", () => {
+    test('should be able to be added after a number.', () => {
       for (const num of NUMBERS) {
         controller.process(num, num);
         controller.process(MINUS, MINUS);
 
-        expect(controller.formula.last().trim()).to.equal(MINUS);
-        expect(controller.expression.last().trim()).to.equal(MINUS);
+        expect(controller.formula.last().trim()).toEqual(MINUS);
+        expect(controller.expression.last().trim()).toEqual(MINUS);
 
         controller.process(CE, CE);
         controller.process(CE, CE);
       }
     });
 
-    it ("should not be able to be added after a dot.", () => {
+    test('should not be able to be added after a dot.', () => {
       controller.process(ONE, ONE);
       controller.process(DOT, DOT);
       controller.process(MINUS, MINUS);
 
-      expect(controller.formula.last().trim()).not.to.equal(MINUS);
-      expect(controller.expression.last().trim()).not.to.equal(MINUS);
+      expect(controller.formula.last().trim()).not.toEqual(MINUS);
+      expect(controller.expression.last().trim()).not.toEqual(MINUS);
     });
   });
 
-  describe("Right parenthesis", () => {
-    it ("should be able to be added after a right parenthesis when it lacks.", () => {
+  describe('Right parenthesis', () => {
+    test('should be able to be added after a right parenthesis when it lacks.', () => {
       controller.process(LEFT_PAREN, LEFT_PAREN);
       controller.process(LEFT_PAREN, LEFT_PAREN);
       controller.process(ONE, ONE);
       controller.process(RIGHT_PAREN, RIGHT_PAREN);
       controller.process(RIGHT_PAREN, RIGHT_PAREN);
 
-      expect(controller.formula.last().trim()).to.equal(RIGHT_PAREN);
-      expect(controller.expression.last().trim()).to.equal(RIGHT_PAREN);
+      expect(controller.formula.last().trim()).toEqual(RIGHT_PAREN);
+      expect(controller.expression.last().trim()).toEqual(RIGHT_PAREN);
     });
 
-    it ("should be able to be added after a number when it lacks.", () => {
+    test('should be able to be added after a number when it lacks.', () => {
       controller.process(LEFT_PAREN, LEFT_PAREN);
       for (const num of NUMBERS) {
         controller.process(num, num);
         controller.process(RIGHT_PAREN, RIGHT_PAREN);
 
-        expect(controller.formula.last().trim()).to.equal(RIGHT_PAREN);
-        expect(controller.expression.last().trim()).to.equal(RIGHT_PAREN);
+        expect(controller.formula.last().trim()).toEqual(RIGHT_PAREN);
+        expect(controller.expression.last().trim()).toEqual(RIGHT_PAREN);
 
         controller.process(CE, CE);
         controller.process(CE, CE);
       }
     });
 
-    it ("should not be able to be added after a binary operator even when it lacks.", () => {
+    test('should not be able to be added after a binary operator even when it lacks.', () => {
       controller.process(LEFT_PAREN, LEFT_PAREN);
       controller.process(ONE, ONE);
       for (const bop of BINARY_OPERATORS) {
         controller.process(bop, bop);
         controller.process(RIGHT_PAREN, RIGHT_PAREN);
 
-        expect(controller.formula.last().trim()).not.to.equal(RIGHT_PAREN);
-        expect(controller.expression.last().trim()).not.to.equal(RIGHT_PAREN);
+        expect(controller.formula.last().trim()).not.toEqual(RIGHT_PAREN);
+        expect(controller.expression.last().trim()).not.toEqual(RIGHT_PAREN);
 
         controller.process(CE, CE);
       }
     });
   });
 
-  describe("Square root", () => {
-    it ("should be able to be added after a right parenthesis.", () => {
+  describe('Square root', () => {
+    test('should be able to be added after a right parenthesis.', () => {
       controller.process(LEFT_PAREN, LEFT_PAREN);
       controller.process(ONE, ONE);
       controller.process(RIGHT_PAREN, RIGHT_PAREN);
       controller.process(SQRT, SQRT);
 
-      expect(controller.formula.last().trim()).to.equal(LEFT_PAREN);
-      expect(controller.expression.last().trim()).to.equal(LEFT_PAREN);
+      expect(controller.formula.last().trim()).toEqual(LEFT_PAREN);
+      expect(controller.expression.last().trim()).toEqual(LEFT_PAREN);
     });
 
-    it ("should be able to be added after a number.", () => {
+    test('should be able to be added after a number.', () => {
       for (const num of NUMBERS) {
         controller.process(num, num);
         controller.process(SQRT, SQRT);
 
-        expect(controller.formula.last().trim()).to.equal(LEFT_PAREN);
-        expect(controller.expression.last().trim()).to.equal(LEFT_PAREN);
+        expect(controller.formula.last().trim()).toEqual(LEFT_PAREN);
+        expect(controller.expression.last().trim()).toEqual(LEFT_PAREN);
 
         controller.process(CE, CE);
         controller.process(CE, CE);
@@ -424,14 +422,14 @@ describe("Controller", () => {
       }
     });
 
-    it ("should be able to replace a binary operator with itself.", () => {
+    test('should be able to replace a binary operator with itself.', () => {
       controller.process(ONE, ONE);
       for (const bop of BINARY_OPERATORS) {
         controller.process(bop, bop);
         controller.process(SQRT, SQRT);
 
-        expect(controller.formula.last().trim()).to.equal(LEFT_PAREN);
-        expect(controller.expression.last().trim()).to.equal(LEFT_PAREN);
+        expect(controller.formula.last().trim()).toEqual(LEFT_PAREN);
+        expect(controller.expression.last().trim()).toEqual(LEFT_PAREN);
 
         controller.process(CE, CE);
         controller.process(CE, CE);
